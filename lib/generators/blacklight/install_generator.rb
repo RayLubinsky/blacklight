@@ -40,17 +40,17 @@ module Blacklight
       generate solr_generator, generator_options
     end
 
-    def bundle_install
-      Bundler.with_clean_env do
-        run "bundle install"
-      end
-    end
-
     # Copy all files in templates/public/ directory to public/
     # Call external generator in AssetsGenerator, so we can
     # leave that callable seperately too.
     def copy_public_assets
       generate "blacklight:assets" unless options[:'skip-assets']
+    end
+
+    def bundle_install
+      Bundler.with_clean_env do
+        run "bundle install"
+      end
     end
 
     def generate_blacklight_document
